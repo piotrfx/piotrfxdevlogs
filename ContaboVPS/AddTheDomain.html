@@ -1,0 +1,48 @@
+0. Install Apache.
+1. cd to /etc/apache2/sites-available.
+2. sudo touch domain.extension.conf.
+3. sudo nano domain.extension.conf.
+
+# Begin vhost record on the default HTTP port 80
+<VirtualHost *:80>
+    # This is the name of the vhost.
+    ServerName domain.extension
+    # These are alternative names for this same vhost.
+    # We put the other domains here. They will all go to the same place.
+    ServerAlias news.udrupal.com
+    ServerAlias domain.extension
+    # Directory where the website code lives.
+    DocumentRoot /var/www/domain_name
+
+    <Directory />
+    	Options FollowSymLinks
+    	AllowOverride All
+    </Directory>
+
+</VirtualHost>
+
+So:
+
+<VirtualHost *:80>
+
+    ServerName nextcloud.inteteam.ovh
+
+    ServerAlias nextcloud.inteteam.ovh
+
+    DocumentRoot /var/www/html/nextcloud
+
+    <Directory />
+    	Options FollowSymLinks
+    	AllowOverride All
+    </Directory>
+    <IfModule mod_dav.c>
+        Dav off
+    </IfModule>
+
+</VirtualHost>
+
+Save and enable domain, by: sudo a2ensite domain.extension.conf.
+
+
+FPM = sudo service php8.0-fpm start
+Stop: sudo service php8.0-fpm stop
