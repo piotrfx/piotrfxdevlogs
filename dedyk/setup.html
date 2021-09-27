@@ -1,0 +1,140 @@
+a2V6019UjnDc2wTR
+
+
+51.77.52.44
+
+Yoda domowy IP: 81.102.103.211
+
+
+
+piotrf: MojeSkarby1991
+
+CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'a2V6019UjnDc2wTR';
+
+wget https://download.nextcloud.com/server/releases/nextcloud-22.1.1.zip
+
+FPM = sudo service php8.0-fpm start
+Stop: sudo service php8.0-fpm stop
+
+FPM service scan: sudo tail -f /var/log/php8.0-fpm.log
+
+This is important to understand: 
+https://chrismoore.ca/2018/10/finding-the-correct-pm-max-children-settings-for-php-fpm/
+ps -ef | grep '[f]'pm
+
+https://spot13.com/pmcalculator/
+
+
+
+<IfModule mod_ssl.c>
+<VirtualHost *:443>
+
+    ServerName nextcloud.inteteam.ovh
+
+    ServerAlias nextcloud.inteteam.ovh
+
+    DocumentRoot /var/www/html/nextcloud
+
+    <Directory />
+        Options FollowSymLinks
+        AllowOverride All
+    </Directory>
+    <IfModule mod_dav.c>
+        Dav off
+    </IfModule>
+     <IfModule mod_headers.c>
+      Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains"
+    </IfModule>
+SSLCertificateFile /etc/letsencrypt/live/nextcloud.inteteam.ovh/fullchain.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/nextcloud.inteteam.ovh/privkey.pem
+Include /etc/letsencrypt/options-ssl-apache.conf
+</VirtualHost>
+</IfModule>
+
+
+---------------------------------------------------------------
+
+<?php
+$CONFIG = array (
+  'instanceid' => 'ocij0fhjggph',
+  'passwordsalt' => 'eU9F0NMr6hGXkepdBuMF7VLEljKjK3',
+  'secret' => 'H1r+XuS/rVaEAzbdxh9UCBBkuh8153O+NOOgQKtvluiT8oBJ',
+  'trusted_domains' =>
+  array (
+    0 => '51.77.52.44',
+    1 => 'nextcloud.inteteam.ovh',
+  ),
+  'datadirectory' => '/var/www/html/nextcloud/data',
+  'dbtype' => 'mysql',
+  'version' => '22.1.1.2',
+  'overwrite.cli.url' => 'http://51.77.52.44/nextcloud',
+  'dbname' => 'nextcloud',
+  'dbhost' => 'localhost',
+  'dbport' => '',
+  'dbtableprefix' => 'oc_',
+  'default_phone_region' => 'GB',
+  'mysql.utf8mb4' => true,
+  'dbuser' => 'nextcloud',
+  'dbpassword' => 'a2V6019UjnDc2wTR',
+  'installed' => true,
+  'app_install_overwrite' =>
+  array (
+    0 => 'dropit',
+  ),
+);
+
+with aPCU, Redis, file.locking:
+
+https://www.youtube.com/watch?v=d3eBVmcJ7s0
+
+<?php
+$CONFIG = array (
+  'instanceid' => 'ocij0fhjggph',
+  'passwordsalt' => 'eU9F0NMr6hGXkepdBuMF7VLEljKjK3',
+  'secret' => 'H1r+XuS/rVaEAzbdxh9UCBBkuh8153O+NOOgQKtvluiT8oBJ',
+  'trusted_domains' =>
+  array (
+    0 => '51.77.52.44',
+    1 => 'nextcloud.inteteam.ovh',
+  ),
+  'datadirectory' => '/var/www/html/nextcloud/data',
+  'dbtype' => 'mysql',
+  'version' => '22.1.1.2',
+  'overwrite.cli.url' => 'http://51.77.52.44/nextcloud',
+  'dbname' => 'nextcloud',
+  'dbhost' => 'localhost',
+  'dbport' => '',
+  'dbtableprefix' => 'oc_',
+  'default_phone_region' => 'GB',
+  'memcache.local' => '\OC\Memcache\APCu',
+  'distributed' => '\\OC\\Memcache\\Redis',
+  'memcache.logcking' => '\\OC\\Memcache\\Redis',
+  'filelocking.enabled' => 'true',
+  'redis' => [
+     'host'     => 'var/run/redis/redis-server.sock',
+     'port'     => 0,
+     'timeout'  => 0.0,
+     ],
+  'mysql.utf8mb4' => true,
+  'dbuser' => 'nextcloud',
+  'dbpassword' => 'a2V6019UjnDc2wTR',
+  'installed' => true,
+  'preview_max_scale_factor' => 10,
+  'app_install_overwrite' =>
+  array (
+    0 => 'dropit',
+    1 => 'xray',
+  ),
+);
+
+---------------------------------------------------------------
+
+apt install php-imagick imagemagick
+
+https://serversforhackers.com/c/php-fpm-process-management
+
+htop cli tool to manage processes.
+
+---------------------------------------------------------------
+
+https://guides.wp-bullet.com/how-to-configure-redis-to-use-unix-socket-speed-boost/

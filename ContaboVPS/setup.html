@@ -1,0 +1,18 @@
+1JustDoItBoTak
+ZbitaDupa1980
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-nextcloud-on-ubuntu-18-04
+
+sudo nextcloud.manual-install piotr.ficner ZbitaDupa1980
+
+sudo nextcloud.occ config:system:set trusted_domains 1 --value=95.111.247.51
+
+wget https://download.nextcloud.com/server/releases/nextcloud-22.1.1.zip
+
+unzip nextcloud-22.1.1.zip
+
+sudo chown -R www-data:www-data /var/www/html/nextcloud
+
+sudo sed -i '/^memory_limit =/s/=.*/= 512M/' /etc/php/7.4/apache2/php.ini
+
+https://www.techrepublic.com/article/how-to-install-nextcloud-20-on-ubuntu-server-20-04/
